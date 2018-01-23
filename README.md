@@ -1,12 +1,14 @@
 # Angular Schematics Evaluate
 ## 教學文件
 - https://leanpub.com/angular-schematics
-## 前置作業
-- cd angular-crud
-- npm install
-- cd benapp
-- npm install
-## 建立客製化範本程式範例
+## 前置作業：還原node_modules
+- angular-crud (程式範本專案)
+  - cd angular-crud
+  - npm install
+- benapp (測試用專案)
+  - cd benapp
+  - npm install
+## 建立客製化範本程式的指令範例 (在benapp專案的根目錄執行指令)
 - 建立客製化的Component
   -  ng g benmenu side-menu  -ms --collection="../angular-crud"
 - 在已建好的Module加入客製化的Component
