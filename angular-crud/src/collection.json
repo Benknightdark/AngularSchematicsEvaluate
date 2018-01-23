@@ -11,6 +11,12 @@
         "factory": "./menu",
         "description": "Generates a menu component",
         "schema": "./menu/schema.json"
+      },
+      "menumodule": {
+        "aliases": [ "mnu" ],
+        "factory": "./menu-module",
+        "description": "Generates a menu component",
+        "schema": "./menu-module/schema.json"
       }
     }
 }
