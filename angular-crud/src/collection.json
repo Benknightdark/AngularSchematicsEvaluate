@@ -5,6 +5,12 @@
         "factory": "./crud-module",
         "description": "Generates a crud module",
         "schema": "./crud-module/schema.json"
+      },
+      "benmenu": {
+        "aliases": [ "mnu" ],
+        "factory": "./menu",
+        "description": "Generates a menu component",
+        "schema": "./menu/schema.json"
       }
     }
 }

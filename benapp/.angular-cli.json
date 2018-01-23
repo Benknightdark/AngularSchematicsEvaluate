@@ -19,7 +19,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "assets/css/bootstrap.min.css",
+        "assets/css/paper-dashboard.css",
+        "assets/css/demo.css",
+        "assets/css/themify-icons.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
