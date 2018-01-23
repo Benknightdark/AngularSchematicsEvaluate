@@ -7,7 +7,7 @@
 - npm install typescript
 - npm install rxjs
 ## Step2：建立客製化範本範例
-- 建立Component：ng g c web7 --collection="../@custom/myang"
+- 建立Component：ng g benmenu side-menu  -ms --collection="../angular-crud"
 
 # angular-crud
 
