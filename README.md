@@ -6,9 +6,10 @@
 - npm install
 - cd benapp
 - npm install
-## 建立客製化範本範例
-- 建立Component：ng g benmenu side-menu  -ms --collection="../angular-crud"
-- 建立Module
+## 建立客製化範本程式範例
+- 建立客製化的Component
+  -  ng g benmenu side-menu  -ms --collection="../angular-crud"
+- 在已建好的Module加入客製化的Component
   - ng g m core
   - ng g menumodule  /core/side-menu  -ms --export --collection='../angular-crud'
 # angular-crud
