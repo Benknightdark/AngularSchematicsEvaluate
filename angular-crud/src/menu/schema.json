@@ -19,6 +19,17 @@
         "type": "string",
         "default": "src"
       },
+      "module":  {
+        "type": "string",
+        "description": "The declaring module.",
+        "alias": "m"
+      },
+      "export": {
+        "type": "boolean",
+        "default": false,
+        "description": "Export component from module?"
+      },
+
       "menuService": {
         "type": "boolean",
         "default": false,
