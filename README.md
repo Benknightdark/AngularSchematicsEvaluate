@@ -1,3 +1,14 @@
+# Angular Schematics Evaluate
+## Step1：複製現有的Schematics code template
+- cd ~/n/lib/node_modules/@angular/cli/node_modules/
+- mkdir -p @custom/myangular
+- cp -R @schematics/angular/* @custom/myangular/
+- cd @custom/myangular
+- npm install typescript
+- npm install rxjs
+## Step2：建立客製化範本範例
+- 建立Component：ng g c web7 --collection="../@custom/myang"
+
 # angular-crud
 
 Generating CRUD applications with the Angular CLI and Schematics.

@@ -6,18 +6,20 @@ import { FlightModule } from './flight/flight.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
- 
+import { HotelModule } from './hotel/hotel.module';
+
 @NgModule({
   imports: [
     BrowserModule,
     CoreModule,
     HttpClientModule,
-    RouterModule.forRoot([{ 
+    RouterModule.forRoot([{
       path: '',
       component: HomeComponent,
       pathMatch: 'full'
     }]),
-    FlightModule
+    FlightModule,
+    HotelModule
   ],
   declarations: [
     AppComponent,

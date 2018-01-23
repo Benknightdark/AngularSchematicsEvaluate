@@ -7,7 +7,10 @@
     "test": "npm run build && jasmine **/*_spec.js"
   },
   "keywords": [
-    "schematics", "Angular", "CRUD", "generate"
+    "schematics",
+    "Angular",
+    "CRUD",
+    "generate"
   ],
   "author": "Manfred Steyer",
   "license": "MIT",
@@ -20,14 +23,13 @@
     "@types/json5": "0.0.29",
     "@types/node": "^8.0.31",
     "jasmine": "^2.8.0",
-    "typescript": "^2.4.0"
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "json5": "^0.5.1"
   },
-  "repository": { 
-    "type" : "git", 
-    "url" : "https://github.com/manfredsteyer/angular-crud"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manfredsteyer/angular-crud"
   }
-
 }
