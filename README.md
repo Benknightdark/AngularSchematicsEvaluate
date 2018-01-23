@@ -1,12 +1,12 @@
 # Angular Schematics Evaluate
-## Step1：複製現有的Schematics code template
-- cd ~/n/lib/node_modules/@angular/cli/node_modules/
-- mkdir -p @custom/myangular
-- cp -R @schematics/angular/* @custom/myangular/
-- cd @custom/myangular
-- npm install typescript
-- npm install rxjs
-## Step2：建立客製化範本範例
+## 教學文件
+- https://leanpub.com/angular-schematics
+## 前置作業
+- cd angular-crud
+- npm install
+- cd benapp
+- npm install
+## 建立客製化範本範例
 - 建立Component：ng g benmenu side-menu  -ms --collection="../angular-crud"
 
 # angular-crud
