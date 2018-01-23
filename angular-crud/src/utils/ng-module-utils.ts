@@ -1,4 +1,3 @@
-
 // Option A: Directly referencing the private APIs
 // import { ModuleOptions, buildRelativePath } from "@schematics/angular/utility/find-module";
 // import { Rule, Tree, SchematicsException } from "@angular-devkit/schematics";
@@ -8,18 +7,39 @@
 
 // Option B: Using a fork of the private APIs b/c they can change
 
-import { Rule, Tree, SchematicsException } from '@angular-devkit/schematics';
-import { AddImportToModuleContext } from './add-to-module-context';
-import * as ts from 'typescript';
-import { dasherize, classify } from '@angular-devkit/core';
+import { Rule, Tree, SchematicsException } from "@angular-devkit/schematics";
+import {
+  AddImportToModuleContext,
+  AddToModuleContext
+} from "./add-to-module-context";
+import * as ts from "typescript";
+import { dasherize, classify } from "@angular-devkit/core";
+// Referencing forked and copied private APIs
+import {
+  ModuleOptions,
+  buildRelativePath
+} from "../schematics-angular-utils/find-module";
+import { addImportToModule } from "../schematics-angular-utils/ast-utils";
+import { InsertChange } from "../schematics-angular-utils/change";
 
-// Referencing forked and copied private APIs 
-import { ModuleOptions, buildRelativePath } from '../schematics-angular-utils/find-module';
-import { addImportToModule } from '../schematics-angular-utils/ast-utils';
-import { InsertChange } from '../schematics-angular-utils/change';
-
+import {
+  addDeclarationToModule,
+  addExportToModule
+} from "../schematics-angular-utils/ast-utils";
 
 const stringUtils = { dasherize, classify };
+export function addDeclarationToNgModule(
+  options: ModuleOptions,
+  exports: boolean
+): Rule {
+  return (host: Tree) => {
+    addDeclaration(host, options);
+    if (exports) {
+      addExport(host, options);
+    }
+    return host;
+  };
+}
 
 export function addImportToParentModule(options: ModuleOptions): Rule {
   return (host: Tree) => {
@@ -27,9 +47,88 @@ export function addImportToParentModule(options: ModuleOptions): Rule {
     return host;
   };
 }
+function createAddToModuleContext(
+  host: Tree,
+  options: ModuleOptions
+): AddToModuleContext {
+  const result = new AddToModuleContext();
 
-function createAddImportToModuleContext(host: Tree, options: ModuleOptions): AddImportToModuleContext {
+  if (!options.module) {
+    throw new SchematicsException(`Module not found.`);
+  }
 
+  const text = host.read(options.module);
+
+  if (text === null) {
+    throw new SchematicsException(`File ${options.module} does not exist.`);
+  }
+  const sourceText = text.toString("utf-8");
+  result.source = ts.createSourceFile(
+    options.module,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true
+  );
+
+  const componentPath =
+    `/${options.sourceDir}/${options.path}/` +
+    stringUtils.dasherize(options.name) +
+    "/" +
+    stringUtils.dasherize(options.name) +
+    ".component";
+
+  result.relativePath = buildRelativePath(options.module, componentPath);
+
+  result.classifiedName = stringUtils.classify(`${options.name}Component`);
+
+  return result;
+}
+
+function addDeclaration(host: Tree, options: ModuleOptions) {
+  const context = createAddToModuleContext(host, options);
+  const modulePath = options.module || "";
+
+  const declarationChanges = addDeclarationToModule(
+    context.source,
+    modulePath,
+    context.classifiedName,
+    context.relativePath
+  );
+
+  const declarationRecorder = host.beginUpdate(modulePath);
+  for (const change of declarationChanges) {
+    if (change instanceof InsertChange) {
+      declarationRecorder.insertLeft(change.pos, change.toAdd);
+    }
+  }
+  host.commitUpdate(declarationRecorder);
+}
+
+function addExport(host: Tree, options: ModuleOptions) {
+  const context = createAddToModuleContext(host, options);
+  const modulePath = options.module || "";
+
+  const exportChanges = addExportToModule(
+    context.source,
+    modulePath,
+    context.classifiedName,
+    context.relativePath
+  );
+
+  const exportRecorder = host.beginUpdate(modulePath);
+
+  for (const change of exportChanges) {
+    if (change instanceof InsertChange) {
+      exportRecorder.insertLeft(change.pos, change.toAdd);
+    }
+  }
+  host.commitUpdate(exportRecorder);
+}
+
+function createAddImportToModuleContext(
+  host: Tree,
+  options: ModuleOptions
+): AddImportToModuleContext {
   const result = new AddImportToModuleContext();
 
   if (!options.module) {
@@ -41,30 +140,35 @@ function createAddImportToModuleContext(host: Tree, options: ModuleOptions): Add
   if (text === null) {
     throw new SchematicsException(`File ${options.module} does not exist.`);
   }
-  const sourceText = text.toString('utf-8');
-  result.source = ts.createSourceFile(options.module, sourceText, ts.ScriptTarget.Latest, true);
+  const sourceText = text.toString("utf-8");
+  result.source = ts.createSourceFile(
+    options.module,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true
+  );
 
-  const moduleToImportPath = `/${options.sourceDir}/${options.path}/`
-      + stringUtils.dasherize(options.name)
-      + '.module';
+  const moduleToImportPath =
+    `/${options.sourceDir}/${options.path}/` +
+    stringUtils.dasherize(options.name) +
+    ".module";
 
   result.relativePath = buildRelativePath(options.module, moduleToImportPath);
 
   result.classifiedName = stringUtils.classify(`${options.name}Module`);
 
   return result;
-
 }
-
 function addImport(host: Tree, options: ModuleOptions) {
-
   const context = createAddImportToModuleContext(host, options);
-  const modulePath = options.module || '';
+  const modulePath = options.module || "";
 
-  const declarationChanges = addImportToModule(context.source,
+  const declarationChanges = addImportToModule(
+    context.source,
     modulePath,
-      context.classifiedName,
-      context.relativePath);
+    context.classifiedName,
+    context.relativePath
+  );
 
   const declarationRecorder = host.beginUpdate(modulePath);
   for (const change of declarationChanges) {
@@ -73,5 +177,4 @@ function addImport(host: Tree, options: ModuleOptions) {
     }
   }
   host.commitUpdate(declarationRecorder);
-};
-
+}

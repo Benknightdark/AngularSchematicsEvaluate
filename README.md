@@ -8,7 +8,9 @@
 - npm install
 ## 建立客製化範本範例
 - 建立Component：ng g benmenu side-menu  -ms --collection="../angular-crud"
-
+- 建立Module
+  - ng g m core
+  - ng g menumodule  /core/side-menu  -ms --export --collection='../angular-crud'
 # angular-crud
 
 Generating CRUD applications with the Angular CLI and Schematics.

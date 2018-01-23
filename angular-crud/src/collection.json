@@ -13,7 +13,7 @@
         "schema": "./menu/schema.json"
       },
       "menumodule": {
-        "aliases": [ "mnu" ],
+        "aliases": [ "mnuu" ],
         "factory": "./menu-module",
         "description": "Generates a menu component",
         "schema": "./menu-module/schema.json"

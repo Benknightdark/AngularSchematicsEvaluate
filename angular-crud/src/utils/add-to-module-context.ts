@@ -5,3 +5,8 @@ export class AddImportToModuleContext {
     relativePath: string;
     classifiedName: string;
 }
+export class AddToModuleContext {
+    source: ts.SourceFile;
+    relativePath: string;
+    classifiedName: string;
+}

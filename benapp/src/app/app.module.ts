@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HotelModule } from './hotel/hotel.module';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -18,9 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HotelModule,
-
-    HttpClientModule
-
+    HttpClientModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

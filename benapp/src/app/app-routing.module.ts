@@ -16,7 +16,12 @@ const routes: Routes = [
   {
     path:"menu",
     component:SideMenuComponent
+  },
+  {
+    path:"",
+    component:SideMenuComponent
   }
+
 ];
 
 @NgModule({
