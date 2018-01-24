@@ -9,11 +9,13 @@
   - cd benapp
   - npm install
 ## 建立客製化範本程式的指令範例 (在benapp專案的根目錄執行指令)
-- 建立客製化的Component
+- 建立客製化的程式範本
   -  ng g benmenu side-menu  -ms --collection="../angular-crud"
-- 在已建好的Module加入客製化的Component
+- 在已建好的Module加入客製化的程式範本
   - ng g m core
   - ng g menumodule  /core/side-menu  -ms --export --collection='../angular-crud'
+- 建立客製化的程式範本，並將範本中的MenuService注入app.component
+  - ng g menuextendmodule side-menu -ms --export --collection='../angular-crud' -f
 # angular-crud
 
 Generating CRUD applications with the Angular CLI and Schematics.
