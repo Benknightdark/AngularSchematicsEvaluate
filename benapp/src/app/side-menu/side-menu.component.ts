@@ -7,8 +7,9 @@ import { SideMenuService } from './side-menu.service';
 @Component({
     selector: 'side-menu',
     templateUrl: 'side-menu.component.html',
+    
         providers: [SideMenuService]
-
+    
 })
 export class SideMenuComponent {
 

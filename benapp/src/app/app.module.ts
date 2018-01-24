@@ -23,6 +23,7 @@ import { CoreModule } from './core/core.module';
     CoreModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [SideMenuComponent]
 })
 export class AppModule { }

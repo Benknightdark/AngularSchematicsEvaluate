@@ -17,6 +17,12 @@
         "factory": "./menu-module",
         "description": "Generates a menu component",
         "schema": "./menu-module/schema.json"
+      },
+      "menuextendmodule": {
+        "aliases": [ "mnue" ],
+        "factory": "./menu-extend-module",
+        "description": "Generates a menu component",
+        "schema": "./menu-extend-module/schema.json"
       }
     }
 }

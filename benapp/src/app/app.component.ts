@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SideMenuService } from './side-menu/side-menu.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(private sideMenuService: SideMenuService) {
+    // sideMenuService.show = true;
+  }
   title = 'app';
 }
